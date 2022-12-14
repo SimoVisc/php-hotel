@@ -49,6 +49,10 @@
     <title>PHP Hotel</title>
 </head>
 <body>
-    
+  <ul>
+    <?php foreach($hotels as $hotel) {?>
+        <li><?php var_dump ($hotel) ?></li>
+    <?php } ?>
+  </ul>
 </body>
 </html>
