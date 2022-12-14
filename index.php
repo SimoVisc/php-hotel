@@ -51,10 +51,37 @@
     <title>PHP Hotel</title>
 </head>
 <body>
-  <ul>
-    <?php foreach($hotels as $hotel) {?>
-        <li><?php var_dump ($hotel) ?></li>
-    <?php } ?>
-  </ul>
+  <table class="table align-middle mb-0 bg-white">
+  <thead class="bg-light">
+    <tr>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Parking</th>
+      <th>Vote</th>
+      <th>distance to center</th>
+    </tr>
+  </thead>
+   <?php foreach($hotels as $hotel) {?>
+  <tbody>
+    <tr>
+      <td>
+        <div class="d-flex align-items-center">
+          <div class="ms-3">
+            <p class="fw-bold mb-1"><?php echo $hotel['name']?></p>
+          </div>
+        </div>
+      </td>
+      <td>
+        <p class="fw-normal mb-1"><?php echo $hotel['description']?></p>
+      </td>
+      <td>
+        <span class="badge badge-success rounded-pill d-inline"><?php echo $hotel['parking']?></span>
+      </td>
+      <td><?php echo $hotel['vote']?></td>
+      <td><?php echo $hotel['distance_to_center']?></td>
+    </tr>
+    </tbody>
+</table>
+<?php } ?>
 </body>
 </html>
