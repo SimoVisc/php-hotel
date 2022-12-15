@@ -38,6 +38,26 @@
         ],
 
     ];
+    $filtered_hotels= $hotels;
+
+      if(!empty($_GET['parking']) || $_GET['parking'] = "0" ){
+        $temp_hotels =[];
+        foreach($filtered_hotels as $hotel){
+          if($hotel['parking'] == $_GET['parking'] ){
+            $temp_hotels[] = $hotel;
+          }
+        }
+        $filtered_hotels = $temp_hotels;
+      }
+      if(!empty($_GET['vote'])){
+        $temp_hotels =[];
+        foreach($filtered_hotels as $hotel){
+          if($hotel['vote'] >= $_GET['vote'] ){
+            $temp_hotels[] = $hotel;
+          }
+        }
+        $filtered_hotels = $temp_hotels;
+      }
 
 ?>
 <!DOCTYPE html>
@@ -51,27 +71,50 @@
     <title>PHP Hotel</title>
 </head>
 <body>
-<table class="table table-striped">
-  <thead>
-    <tr>
-      <th scope="col">Name</th>
-      <th scope="col">Description</th>
-      <th scope="col">Parking</th>
-      <th scope="col">Vote</th>
-      <th scope="col">Distance to center</th>
-    </tr>
-  </thead>
-  <tbody>
-    <?php foreach($hotels as $hotel) {?>
-    <tr>
-      <th scope="row"> <?php echo $hotel['name']?></th>
-      <td><?php echo $hotel['description']?></td>
-      <td><?php echo $hotel['parking'] ? 'si':'no'; ?></td>
-      <td><?php echo $hotel['vote']?></td>
-      <td><?php echo $hotel['distance_to_center']?></td>
-    </tr>
-    <?php } ?>
-  </tbody>
-</table>
+  <div class="container">
+    <h3>Filtra gli Hotel</h3>
+   <form class=" my-3">
+      <label for="parcheggio" class="form-label">Parcheggio</label>
+      <select id="parcheggio" name="parking" class="form-select">
+        <option value="" selected>Nessuna preferenza</option>
+        <option value="1">Si</option>
+        <option value="0">No</option>
+      </select>
+      <label for="voto" class="form-label">Voto</label>
+      <select  id="voto "name="vote" class="form-select">
+        <option value="" selected>Nessuna preferenza</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+      </select>
+      <div class="col-auto">
+        <button type="submit" class="btn btn-primary my-3">Filtra</button>
+      </div>
+    </form>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col">Name</th>
+          <th scope="col">Description</th>
+          <th scope="col">Parking</th>
+          <th scope="col">Vote</th>
+          <th scope="col">Distance to center</th>
+        </tr>
+      </thead>
+      <tbody>
+        <?php foreach($filtered_hotels as $hotel) {?>
+        <tr>
+          <th scope="row"> <?php echo $hotel['name']?></th>
+          <td><?php echo $hotel['description']?></td>
+          <td><?php echo $hotel['parking'] ? 'si':'no'; ?></td>
+          <td><?php echo $hotel['vote']?></td>
+          <td><?php echo $hotel['distance_to_center']?></td>
+        </tr>
+        <?php } ?>
+      </tbody>
+    </table>
+  </div>
 </body>
 </html>
